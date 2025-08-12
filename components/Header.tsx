@@ -139,7 +139,7 @@ const Header = () => {
           isOpen ? "max-h-screen" : "max-h-0"
         }`}
       >
-        <ul className="flex flex-col space-y-4 text-[#e9c49a] text-base">
+        <ul className={`flex flex-col space-y-4 ${isOpen ? "opacity-100" : "opacity-0"} text-[#e9c49a] text-base`}>
           {navLinks.map((link) => (
             <li key={link.id}>
               {link.isButton ? (
