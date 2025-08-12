@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
 
 const sections = [
@@ -50,12 +49,13 @@ const Header = () => {
     { id: 'whydifferent', label: 'Why Different' },
     { id: 'testimonials', label: 'Testimonials' },
     { id: 'contact', label: 'Contact Us' },
-    { id: 'cta', label: 'Get Started' },
+    { id: 'cta', label: 'Get Started', isButton: true },
   ];
 
   return (
     <header className="w-full bg-black shadow fixed top-0 z-50">
       <div className="max-w-screen-xl mx-auto px-4 py-5 flex justify-between items-center md:px-8">
+        {/* Logo */}
         <div className="relative h-10 w-32">
           <Image
             src="/logo.jpg"
@@ -66,17 +66,27 @@ const Header = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6 text-[#e9c49a] font-medium">
+        <nav className="hidden md:flex space-x-6 font-medium">
           {navLinks.map((link) => (
-            <a
-              key={link.id}
-              href={`#${link.id}`}
-              className={`cursor-pointer hover:text-gray-700 transition ${
-                activeSection === link.id ? 'font-bold underline underline-offset-4' : ''
-              }`}
-            >
-              {link.label}
-            </a>
+            link.isButton ? (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                className="bg-[#e9c49a] text-black px-4 py-2 rounded-lg font-bold hover:opacity-90 transition"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                className={`text-[#e9c49a] cursor-pointer hover:text-gray-400 transition ${
+                  activeSection === link.id ? 'font-bold underline underline-offset-4' : ''
+                }`}
+              >
+                {link.label}
+              </a>
+            )
           ))}
         </nav>
 
@@ -84,11 +94,11 @@ const Header = () => {
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
             {isOpen ? (
-              <svg className="h-6 w-6 text-black" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg className="h-6 w-6 text-[#e9c49a]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>
             ) : (
-              <svg className="h-6 w-6 text-black" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <svg className="h-6 w-6 text-[#e9c49a]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             )}
@@ -99,16 +109,26 @@ const Header = () => {
       {/* Mobile Navigation */}
       {isOpen && (
         <div className="md:hidden px-4 pb-4">
-          <ul className="flex flex-col space-y-4 text-black text-base">
+          <ul className="flex flex-col space-y-4 text-[#e9c49a] text-base">
             {navLinks.map((link) => (
               <li key={link.id}>
-                <a
-                  href={`#${link.id}`}
-                  className="block hover:text-gray-700"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {link.label}
-                </a>
+                {link.isButton ? (
+                  <a
+                    href={`#${link.id}`}
+                    className="block bg-[#e9c49a] text-black px-4 py-2 rounded-lg font-bold hover:opacity-90 transition text-center"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <a
+                    href={`#${link.id}`}
+                    className="block hover:text-gray-400"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
