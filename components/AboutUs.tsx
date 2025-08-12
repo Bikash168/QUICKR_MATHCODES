@@ -4,8 +4,8 @@ import { motion } from 'framer-motion';
 
 export default function AboutSection() {
   return (
-    <section className="bg-black text-[color:#e9c49a] py-20 px-4">
-      <div className="max-w-3xl mx-auto text-center">
+    <section className="bg-black text-[#e9c49a] py-20 px-4">
+      <div className="max-w-4xl mx-auto text-center">
         <motion.h2
           className="text-3xl md:text-4xl font-semibold mb-4 tracking-wide"
           initial={{ opacity: 0, y: -40 }}
@@ -22,7 +22,11 @@ export default function AboutSection() {
           transition={{ delay: 0.2, duration: 0.7 }}
           viewport={{ once: true }}
         >
-          <span className="text-white font-medium">QUICKR MATHCODES</span> is an innovative educational platform built to connect passionate math teachers with curious learners. Whether you’re mastering school curriculum or preparing for competitive exams, we simplify your journey through the power of visual learning and interactive practice.
+          We are a dedicated mathematics learning platform committed to making math simple, engaging, and effective for learners of all ages.
+          Our mission is to connect students with highly qualified teachers who use interactive tools and personalized strategies to make learning more impactful.
+          Whether you’re aiming to improve grades, prepare for competitive exams, or master advanced topics, our platform gives you the right support.
+          <br /><br />
+          We believe that every learner has unique strengths. That’s why our app adapts to your pace, style, and goals — making sure your journey in mathematics is both enjoyable and successful.
         </motion.p>
       </div>
     </section>

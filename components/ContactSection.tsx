@@ -1,90 +1,187 @@
-// ContactSection.tsx
 "use client";
 
-import { Mail, Phone, MapPin } from "lucide-react";
+import React, { useState } from "react";
 
-export default function ContactSection() {
+export default function FreeSessionSection() {
+  const [mode, setMode] = useState("online");
+
+  // Replaced problematic emoji with SVG components
+  const floatingIcons = [
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z"/></svg>, // plus
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H5v2h14z"/></svg>, // minus
+    "✖", // multiply symbol (unicode works fine with color)
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M4 11h16v2H4zM10 4h4v16h-4z" opacity="0" /></svg>, // replaced later with divide
+    "π",
+    "📐"
+  ];
+
+  // Updated divide symbol with SVG
+  floatingIcons[3] = (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+      <circle cx="12" cy="6" r="1.5" />
+      <path d="M4 11h16v2H4z" />
+      <circle cx="12" cy="18" r="1.5" />
+    </svg>
+  );
+
+  const iconPositions = [
+    { top: "-2.5rem", left: "2.5rem" },
+    { top: "2.5rem", right: "2.5rem" },
+    { bottom: "-3rem", left: "4rem" },
+    { bottom: "2.5rem", right: "4rem" },
+    { top: "50%", left: "-2.5rem" },
+    { top: "50%", right: "-2.5rem" },
+  ];
+
   return (
-    <section
-  id="contact"
-  className="w-full py-24 px-6 md:px-16 bg-gradient-to-br from-emerald-900 via-green-800 to-emerald-950 text-white"
->
+    <section className="w-full bg-black py-16 px-6 md:px-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center max-w-7xl mx-auto">
+        
+        {/* Left Side - Girl Image + Floating Icons */}
+        <div className="relative flex justify-center items-center py-10">
+          <img
+            src="/girl-student.png"
+            alt="Excited Student"
+            className="relative z-10 w-[300px] md:w-[400px] lg:w-[500px]"
+          />
 
-      <h2 className="text-4xl sm:text-5xl font-bold mb-6 text-center">
-        Contact Us
-      </h2>
-      <p className="text-center mb-12 text-gray-200 max-w-2xl mx-auto">
-        Have questions or want to work with us? Fill out the form or visit our office.
-        We’d love to hear from you!
-      </p>
+          {floatingIcons.map((icon, i) => (
+            <span
+              key={i}
+              className={`absolute text-[#e9c49a] ${
+                i % 2 === 0
+                  ? "text-5xl md:text-6xl lg:text-7xl"
+                  : "text-4xl md:text-5xl lg:text-6xl"
+              } animate-float${(i % 4) + 1}`}
+              style={{
+                ...iconPositions[i],
+                color: "#e9c49a",
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {typeof icon === "string" ? icon : React.cloneElement(icon, { width: "1em", height: "1em" })}
+            </span>
+          ))}
+        </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {/* Contact Info + Form */}
-        <div className="flex flex-col justify-between bg-emerald-800 bg-opacity-30 backdrop-blur-lg rounded-2xl p-8 shadow-xl">
-          <div className="space-y-6">
-            <div className="flex items-start space-x-4">
-              <Phone className="w-6 h-6 text-lime-400" />
-              <div>
-                <h4 className="font-semibold">Phone</h4>
-                <p className="text-sm text-gray-300">+91 12345 67890</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-4">
-              <Mail className="w-6 h-6 text-lime-400" />
-              <div>
-                <h4 className="font-semibold">Email</h4>
-                <p className="text-sm text-gray-300">contact@yourdomain.com</p>
-              </div>
-            </div>
-            <div className="flex items-start space-x-4">
-              <MapPin className="w-6 h-6 text-lime-400" />
-              <div>
-                <h4 className="font-semibold">Address</h4>
-                <p className="text-sm text-gray-300">123 Green Street, Bhubaneswar, Odisha</p>
-              </div>
-            </div>
+        {/* Right Side - Form Card */}
+        <div className="bg-[#1a1a1a] text-white rounded-2xl shadow-xl p-8 max-w-md mx-auto w-full border border-[#e9c49a]">
+          <h2 className="text-2xl font-bold text-center text-[#e9c49a]">
+            Book your Free Session
+          </h2>
+          <p className="text-gray-400 text-center text-sm mt-1">
+            Learn from India's best teachers
+          </p>
+
+          {/* Session Mode Toggle */}
+          <div className="flex border border-[#e9c49a] rounded-lg mt-6 overflow-hidden">
+            {["online", "offline"].map((item) => (
+              <button
+                key={item}
+                onClick={() => setMode(item)}
+                className={`flex-1 py-2 font-medium transition ${
+                  mode === item
+                    ? "bg-[#e9c49a] text-black"
+                    : "text-[#e9c49a] bg-transparent"
+                }`}
+              >
+                {item.charAt(0).toUpperCase() + item.slice(1)}
+              </button>
+            ))}
           </div>
 
           {/* Form */}
-          <form className="mt-10 space-y-4">
+          <form className="space-y-4 mt-6">
             <input
               type="text"
-              placeholder="Your Name"
-              className="w-full px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:ring-2 focus:ring-lime-400"
+              placeholder="Enter Name of your Child"
+              className="w-full px-4 py-2 border border-[#e9c49a] bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e9c49a]"
               required
             />
+            <div className="flex space-x-2">
+              <input
+                type="tel"
+                placeholder="Enter your Mobile Number"
+                className="flex-1 px-4 py-2 border border-[#e9c49a] bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e9c49a]"
+                required
+              />
+              <button
+                type="button"
+                className="px-4 py-2 bg-[#e9c49a] text-black rounded-lg font-medium"
+              >
+                Send OTP
+              </button>
+            </div>
             <input
               type="email"
-              placeholder="Your Email"
-              className="w-full px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:ring-2 focus:ring-lime-400"
-              required
+              placeholder="Email Address"
+              className="w-full px-4 py-2 border border-[#e9c49a] bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e9c49a]"
             />
-            <textarea
-              placeholder="Your Message"
-              className="w-full px-4 py-2 h-32 rounded-lg bg-white/10 text-white border border-white/20 focus:outline-none focus:ring-2 focus:ring-lime-400 resize-none"
+            <select
+              className="w-full px-4 py-2 border border-[#e9c49a] bg-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e9c49a]"
               required
-            ></textarea>
+            >
+              <option value="">State</option>
+              <option>Odisha</option>
+              <option>Delhi</option>
+              <option>Maharashtra</option>
+            </select>
             <button
               type="submit"
-              className="w-full bg-lime-500 hover:bg-lime-600 text-black font-bold py-2 px-6 rounded-lg transition duration-300"
+              className="w-full py-3 bg-[#e9c49a] text-black font-bold rounded-lg hover:opacity-90"
             >
-              Send Message
+              Continue to Schedule
             </button>
           </form>
         </div>
+      </div>
 
-        {/* Google Map */}
-        <div className="rounded-2xl overflow-hidden shadow-xl h-[500px]">
+      {/* Address & Google Map */}
+      <div className="mt-16 max-w-7xl mx-auto text-white">
+        <h3 className="text-2xl font-bold mb-4 text-[#e9c49a]">Our Address</h3>
+        <p className="mb-6">
+          QUICKR MATHCODES
+          <br />
+          123 Learning Street, Bhubaneswar, Odisha, India
+        </p>
+        <div className="w-full h-80 rounded-lg overflow-hidden shadow-lg">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.1466901744744!2d85.8317!3d20.2961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1909d5f95e7d7f%3A0x9ff282b49b8b6cf6!2sTrident%20Academy%20of%20Technology!5e0!3m2!1sen!2sin!4v1617366233071!5m2!1sen!2sin"
+            title="Google Map Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.1454299643946!2d85.83128087476277!3d20.295442512032787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1909a57c3dbb7b%3A0x123456789abcdef!2sBhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1693412345678!5m2!1sen!2sin"
             width="100%"
             height="100%"
+            style={{ border: 0 }}
+            allowFullScreen={true}
             loading="lazy"
-            className="border-0 w-full h-full"
-            allowFullScreen
           ></iframe>
         </div>
       </div>
+
+      {/* Animations */}
+      <style jsx>{`
+        @keyframes float1 {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes float2 {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(10px); }
+        }
+        @keyframes float3 {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        @keyframes float4 {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(15px) rotate(-5deg); }
+        }
+        .animate-float1 { animation: float1 4s ease-in-out infinite; }
+        .animate-float2 { animation: float2 5s ease-in-out infinite; }
+        .animate-float3 { animation: float3 6s ease-in-out infinite; }
+        .animate-float4 { animation: float4 6s ease-in-out infinite; }
+      `}</style>
     </section>
   );
 }

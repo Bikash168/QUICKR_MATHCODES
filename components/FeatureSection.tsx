@@ -1,30 +1,44 @@
 'use client';
 
-import { BookOpen, Users, Smartphone } from 'lucide-react';
+import { Users, PenTool, MessageCircle, Clock, DollarSign, BookOpen } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const features = [
   {
     icon: <Users size={40} color="#e9c49a" />,
-    title: 'Teacher-Student Matchmaking',
-    description: 'Smart algorithm to connect learners with the most suitable Math teachers.',
+    title: 'Experienced Teachers',
+    description: 'Verified educators with proven results.',
+  },
+  {
+    icon: <PenTool size={40} color="#e9c49a" />,
+    title: 'Interactive Learning Tools',
+    description: 'Step-by-step problem solving.',
+  },
+  {
+    icon: <MessageCircle size={40} color="#e9c49a" />,
+    title: 'Anytime Doubt Clearing',
+    description: 'No more waiting for the next class.',
+  },
+  {
+    icon: <Clock size={40} color="#e9c49a" />,
+    title: 'Flexible Scheduling',
+    description: 'Choose class times that fit your routine.',
+  },
+  {
+    icon: <DollarSign size={40} color="#e9c49a" />,
+    title: 'Affordable Learning',
+    description: 'High-quality teaching at reasonable rates.',
   },
   {
     icon: <BookOpen size={40} color="#e9c49a" />,
-    title: 'Interactive Learning',
-    description: 'Live problem-solving sessions, quizzes, and practice sets.',
-  },
-  {
-    icon: <Smartphone size={40} color="#e9c49a" />,
-    title: 'Mobile-First Experience',
-    description: 'Optimized for phones and tablets – learn on the go!',
+    title: 'Personalized Learning Plans',
+    description: 'Custom study paths based on your strengths and weaknesses.',
   },
 ];
 
-
 export default function FeatureSection() {
   return (
-    <section className="bg-black text-white py-24 px-6">
+    <section id="features" className="bg-black text-white py-24 px-6">
       <div className="max-w-6xl mx-auto text-center">
         <motion.h2
           className="text-4xl md:text-5xl font-bold mb-16 tracking-wide text-[color:#e9c49a]"
@@ -33,16 +47,16 @@ export default function FeatureSection() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          Platform Features
+          Key Features
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           {features.map((feature, index) => (
             <motion.div
               key={index}
               className="bg-zinc-900 rounded-xl p-8 shadow-xl hover:shadow-2xl hover:scale-[1.03] transition duration-300"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
+              transition={{ delay: index * 0.15, duration: 0.6 }}
               viewport={{ once: true }}
             >
               <div className="mb-4 flex justify-center">{feature.icon}</div>
