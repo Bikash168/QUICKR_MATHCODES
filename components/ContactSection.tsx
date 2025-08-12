@@ -7,8 +7,8 @@ export default function FreeSessionSection() {
 
   // Replaced problematic emoji with SVG components
   const floatingIcons = [
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z"/></svg>, // plus
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H5v2h14z"/></svg>, // minus
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z" /></svg>, // plus
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H5v2h14z" /></svg>, // minus
     "✖", // multiply symbol (unicode works fine with color)
     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M4 11h16v2H4zM10 4h4v16h-4z" opacity="0" /></svg>, // replaced later with divide
     "π",
@@ -36,7 +36,7 @@ export default function FreeSessionSection() {
   return (
     <section className="w-full bg-black py-16 px-6 md:px-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center max-w-7xl mx-auto">
-        
+
         {/* Left Side - Girl Image + Floating Icons */}
         <div className="relative flex justify-center items-center py-10">
           <img
@@ -48,11 +48,10 @@ export default function FreeSessionSection() {
           {floatingIcons.map((icon, i) => (
             <span
               key={i}
-              className={`absolute text-[#e9c49a] ${
-                i % 2 === 0
-                  ? "text-5xl md:text-6xl lg:text-7xl"
-                  : "text-4xl md:text-5xl lg:text-6xl"
-              } animate-float${(i % 4) + 1}`}
+              className={`absolute text-[#e9c49a] ${i % 2 === 0
+                ? "text-5xl md:text-6xl lg:text-7xl"
+                : "text-4xl md:text-5xl lg:text-6xl"
+                } animate-float${(i % 4) + 1}`}
               style={{
                 ...iconPositions[i],
                 color: "#e9c49a",
@@ -81,11 +80,10 @@ export default function FreeSessionSection() {
               <button
                 key={item}
                 onClick={() => setMode(item)}
-                className={`flex-1 py-2 font-medium transition ${
-                  mode === item
-                    ? "bg-[#e9c49a] text-black"
-                    : "text-[#e9c49a] bg-transparent"
-                }`}
+                className={`flex-1 py-2 font-medium transition ${mode === item
+                  ? "bg-[#e9c49a] text-black"
+                  : "text-[#e9c49a] bg-transparent"
+                  }`}
               >
                 {item.charAt(0).toUpperCase() + item.slice(1)}
               </button>
@@ -141,15 +139,29 @@ export default function FreeSessionSection() {
       {/* Address & Google Map */}
       <div className="mt-16 max-w-7xl mx-auto text-white">
         <h3 className="text-2xl font-bold mb-4 text-[#e9c49a]">Our Address</h3>
-        <p className="mb-6">
+        <p className="mb-2">
           QUICKR MATHCODES
           <br />
-          123 Learning Street, Bhubaneswar, Odisha, India
+          F-2, Chandaka Industrial Estate
+          <br />
+          In front of Infocity, Infocity
+          <br />
+          Chandrasekharpur, Bhubaneshwar
+          <br />
+          Odisha - 751024
         </p>
+
+        <p className="mb-2">
+          <span className="font-semibold text-[#e9c49a]">Phone:</span> +91 98765 43210
+        </p>
+        <p className="mb-6">
+          <span className="font-semibold text-[#e9c49a]">Email:</span> contact@quickrmathcodes.com
+        </p>
+
         <div className="w-full h-80 rounded-lg overflow-hidden shadow-lg">
           <iframe
             title="Google Map Location"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.1454299643946!2d85.83128087476277!3d20.295442512032787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a1909a57c3dbb7b%3A0x123456789abcdef!2sBhubaneswar%2C%20Odisha!5e0!3m2!1sen!2sin!4v1693412345678!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7482.0614668432645!2d85.807754!3d20.340349!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190902b2a59ce5%3A0xdfb554a4e0bafffb!2sTrident%20Academy%20of%20Technology!5e0!3m2!1sen!2sus!4v1738245957890!5m2!1sen!2sus"
             width="100%"
             height="100%"
             style={{ border: 0 }}
