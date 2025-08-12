@@ -5,24 +5,18 @@ import React, { useState } from "react";
 export default function FreeSessionSection() {
   const [mode, setMode] = useState("online");
 
-  // Replaced problematic emoji with SVG components
   const floatingIcons = [
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z" /></svg>, // plus
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 11H5v2h14z" /></svg>, // minus
-    "✖", // multiply symbol (unicode works fine with color)
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M4 11h16v2H4zM10 4h4v16h-4z" opacity="0" /></svg>, // replaced later with divide
+    <svg xmlns="http://www.w3.org/2000/svg" className="text-[#e9c49a]" viewBox="0 0 24 24" width="48" height="48"><path fill="currentColor" d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z" /></svg>, // plus
+    <svg xmlns="http://www.w3.org/2000/svg" className="text-[#e9c49a]" viewBox="0 0 24 24" width="48" height="48"><path fill="currentColor" d="M19 11H5v2h14z" /></svg>, // minus
+    "✖", // multiply
+    <svg xmlns="http://www.w3.org/2000/svg" className="text-[#e9c49a]" viewBox="0 0 24 24" width="48" height="48">
+      <circle fill="currentColor" cx="12" cy="6" r="1.5" />
+      <path fill="currentColor" d="M4 11h16v2H4z" />
+      <circle fill="currentColor" cx="12" cy="18" r="1.5" />
+    </svg>, // divide
     "π",
     "📐"
   ];
-
-  // Updated divide symbol with SVG
-  floatingIcons[3] = (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-      <circle cx="12" cy="6" r="1.5" />
-      <path d="M4 11h16v2H4z" />
-      <circle cx="12" cy="18" r="1.5" />
-    </svg>
-  );
 
   const iconPositions = [
     { top: "-2.5rem", left: "2.5rem" },
@@ -36,7 +30,7 @@ export default function FreeSessionSection() {
   return (
     <section className="w-full bg-black py-16 px-6 md:px-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center max-w-7xl mx-auto">
-
+        
         {/* Left Side - Girl Image + Floating Icons */}
         <div className="relative flex justify-center items-center py-10">
           <img
@@ -44,7 +38,6 @@ export default function FreeSessionSection() {
             alt="Excited Student"
             className="relative z-10 w-[300px] md:w-[400px] lg:w-[500px]"
           />
-
           {floatingIcons.map((icon, i) => (
             <span
               key={i}
@@ -60,7 +53,7 @@ export default function FreeSessionSection() {
                 justifyContent: "center",
               }}
             >
-              {typeof icon === "string" ? icon : React.cloneElement(icon, { width: "1em", height: "1em" })}
+              {typeof icon === "string" ? icon : icon}
             </span>
           ))}
         </div>
@@ -136,39 +129,40 @@ export default function FreeSessionSection() {
         </div>
       </div>
 
-      {/* Address & Google Map */}
-      <div className="mt-16 max-w-7xl mx-auto text-white">
-        <h3 className="text-2xl font-bold mb-4 text-[#e9c49a]">Our Address</h3>
-        <p className="mb-2">
-          QUICKR MATHCODES
-          <br />
-          F-2, Chandaka Industrial Estate
-          <br />
-          In front of Infocity, Infocity
-          <br />
-          Chandrasekharpur, Bhubaneshwar
-          <br />
-          Odisha - 751024
-        </p>
-
-        <p className="mb-2">
-          <span className="font-semibold text-[#e9c49a]">Phone:</span> +91 98765 43210
-        </p>
-        <p className="mb-6">
-          <span className="font-semibold text-[#e9c49a]">Email:</span> contact@quickrmathcodes.com
-        </p>
-
-        <div className="w-full h-80 rounded-lg overflow-hidden shadow-lg">
-          <iframe
-            title="Google Map Location"
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7482.0614668432645!2d85.807754!3d20.340349!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190902b2a59ce5%3A0xdfb554a4e0bafffb!2sTrident%20Academy%20of%20Technology!5e0!3m2!1sen!2sus!4v1738245957890!5m2!1sen!2sus"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
-            allowFullScreen={true}
-            loading="lazy"
-          ></iframe>
+      {/* Address & Logo */}
+      <div className="bg-black text-white py-8 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-center justify-between gap-6">
+          <div className="text-center md:text-left">
+            <h2 className="text-xl font-bold text-[#d4a373] mb-4">Our Address</h2>
+            <p className="font-semibold">QUICKR MATHCODES</p>
+            <p>F-2, Chandaka Industrial Estate</p>
+            <p>In front of Infocity, Infocity</p>
+            <p>Chandrasekharpur, Bhubaneswar</p>
+            <p>Odisha - 751024</p>
+            <p className="mt-2"><span className="font-bold">Phone:</span> +91 98765 43210</p>
+            <p><span className="font-bold">Email:</span> contact@quickrmathcodes.com</p>
+          </div>
+          <div className="flex-shrink-0">
+            <img
+              src="/logo.png"
+              alt="Quickr Mathcodes"
+              className="h-20 w-auto object-contain"
+            />
+          </div>
         </div>
+      </div>
+
+      {/* Google Map */}
+      <div className="w-full h-80 rounded-lg overflow-hidden shadow-lg mt-6">
+        <iframe
+          title="Google Map Location"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7482.0614668432645!2d85.807754!3d20.340349!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a190902b2a59ce5%3A0xdfb554a4e0bafffb!2sTrident%20Academy%20of%20Technology!5e0!3m2!1sen!2sus!4v1738245957890!5m2!1sen!2sus"
+          width="100%"
+          height="100%"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+        ></iframe>
       </div>
 
       {/* Animations */}

@@ -56,14 +56,16 @@ const Header = () => {
     <header className="w-full bg-black shadow fixed top-0 z-50">
       <div className="max-w-screen-xl mx-auto px-4 py-5 flex justify-between items-center md:px-8">
         {/* Logo */}
-        <div className="relative h-10 w-32">
+        <div className="relative h-16 w-48"> {/* Increased size */}
           <Image
-            src="/logo.jpg"
+            src="/logo.png"
             alt="QUICKR MATHCODES"
             layout="fill"
-            objectFit="contain"
+            objectFit="contain" // Or use "cover" for a filled look
+            priority // Makes it load instantly and appear sharp
           />
         </div>
+
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-6 font-medium">
@@ -80,9 +82,8 @@ const Header = () => {
               <a
                 key={link.id}
                 href={`#${link.id}`}
-                className={`text-[#e9c49a] cursor-pointer hover:text-gray-400 transition ${
-                  activeSection === link.id ? 'font-bold underline underline-offset-4' : ''
-                }`}
+                className={`text-[#e9c49a] cursor-pointer hover:text-gray-400 transition ${activeSection === link.id ? 'font-bold underline underline-offset-4' : ''
+                  }`}
               >
                 {link.label}
               </a>
