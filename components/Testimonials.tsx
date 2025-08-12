@@ -1,4 +1,4 @@
-// components/Testimonials.js
+// components/Testimonials.tsx
 import React from "react";
 
 export default function Testimonials() {
@@ -15,17 +15,21 @@ export default function Testimonials() {
         {/* Testimonial 1 */}
         <div className="bg-gray-900 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
           <p className="text-gray-300 italic">
-            "Before joining, I struggled with trigonometry. Now, I can solve complex problems in minutes!"
+            &quot;Before joining, I struggled with trigonometry. Now, I can solve complex problems in minutes!&quot;
           </p>
-          <p className="mt-4 font-semibold text-[color:#e9c49a]">– Rohan, Class 11</p>
+          <p className="mt-4 font-semibold text-[color:#e9c49a]">
+            – Rohan, Class 11
+          </p>
         </div>
 
         {/* Testimonial 2 */}
         <div className="bg-gray-900 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition duration-300">
           <p className="text-gray-300 italic">
-            "This app makes math interesting. I love how interactive the classes are."
+            &quot;This app makes math interesting. I love how interactive the classes are.&quot;
           </p>
-          <p className="mt-4 font-semibold text-[color:#e9c49a]">– Meera, Class 9</p>
+          <p className="mt-4 font-semibold text-[color:#e9c49a]">
+            – Meera, Class 9
+          </p>
         </div>
       </div>
 
@@ -35,7 +39,7 @@ export default function Testimonials() {
           href="#"
           className="inline-block px-8 py-4 bg-[color:#e9c49a] text-black text-lg rounded-full shadow-lg hover:bg-blue-700 hover:scale-105 transition-transform duration-300"
         >
-          📲 Start Learning Today – Download the app now & book your first free session!
+          📲 Start Learning Today – Download the app now &amp; book your first free session!
         </a>
       </div>
     </section>

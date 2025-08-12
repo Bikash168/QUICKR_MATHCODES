@@ -1,21 +1,41 @@
 "use client";
-
+import Image from "next/image";
 import React, { useState } from "react";
 
 export default function FreeSessionSection() {
   const [mode, setMode] = useState("online");
 
+  // Floating icons — all gold
   const floatingIcons = [
-    <svg xmlns="http://www.w3.org/2000/svg" className="text-[#e9c49a]" viewBox="0 0 24 24" width="48" height="48"><path fill="currentColor" d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z" /></svg>, // plus
-    <svg xmlns="http://www.w3.org/2000/svg" className="text-[#e9c49a]" viewBox="0 0 24 24" width="48" height="48"><path fill="currentColor" d="M19 11H5v2h14z" /></svg>, // minus
-    "✖", // multiply
-    <svg xmlns="http://www.w3.org/2000/svg" className="text-[#e9c49a]" viewBox="0 0 24 24" width="48" height="48">
+    <svg
+      key="plus"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-12 h-12"
+      viewBox="0 0 24 24"
+    >
+      <path fill="currentColor" d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6z" />
+    </svg>, // plus
+    <svg
+      key="minus"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-12 h-12"
+      viewBox="0 0 24 24"
+    >
+      <path fill="currentColor" d="M19 11H5v2h14z" />
+    </svg>, // minus
+    <span key="multiply">✖</span>, // multiply
+    <svg
+      key="divide"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-12 h-12"
+      viewBox="0 0 24 24"
+    >
       <circle fill="currentColor" cx="12" cy="6" r="1.5" />
       <path fill="currentColor" d="M4 11h16v2H4z" />
       <circle fill="currentColor" cx="12" cy="18" r="1.5" />
     </svg>, // divide
-    "π",
-    "📐"
+    <span key="pi">π</span>,
+    <span key="protractor">📐</span>,
   ];
 
   const iconPositions = [
@@ -30,21 +50,23 @@ export default function FreeSessionSection() {
   return (
     <section className="w-full bg-black py-16 px-6 md:px-16">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center max-w-7xl mx-auto">
-        
         {/* Left Side - Girl Image + Floating Icons */}
         <div className="relative flex justify-center items-center py-10">
-          <img
+          <Image
             src="/girl-student.png"
             alt="Excited Student"
-            className="relative z-10 w-[300px] md:w-[400px] lg:w-[500px]"
+            width={500} // Adjust width as needed (matches lg:w-[500px])
+            height={500} // Approximate height to keep aspect ratio (adjust accordingly)
+            className="relative z-10 object-contain"
           />
           {floatingIcons.map((icon, i) => (
             <span
-              key={i}
-              className={`absolute text-[#e9c49a] ${i % 2 === 0
-                ? "text-5xl md:text-6xl lg:text-7xl"
-                : "text-4xl md:text-5xl lg:text-6xl"
-                } animate-float${(i % 4) + 1}`}
+              key={`icon-${i}`}
+              className={`absolute text-[#e9c49a] ${
+                i % 2 === 0
+                  ? "text-5xl md:text-6xl lg:text-7xl"
+                  : "text-4xl md:text-5xl lg:text-6xl"
+              } animate-float${(i % 4) + 1}`}
               style={{
                 ...iconPositions[i],
                 color: "#e9c49a",
@@ -53,7 +75,11 @@ export default function FreeSessionSection() {
                 justifyContent: "center",
               }}
             >
-              {typeof icon === "string" ? icon : icon}
+              {typeof icon === "string" ? (
+                <span style={{ color: "#e9c49a" }}>{icon}</span>
+              ) : (
+                React.cloneElement(icon, { fill: "#e9c49a" })
+              )}
             </span>
           ))}
         </div>
@@ -64,7 +90,7 @@ export default function FreeSessionSection() {
             Book your Free Session
           </h2>
           <p className="text-gray-400 text-center text-sm mt-1">
-            Learn from India's best teachers
+            Learn from India&apos;s best teachers
           </p>
 
           {/* Session Mode Toggle */}
@@ -73,10 +99,11 @@ export default function FreeSessionSection() {
               <button
                 key={item}
                 onClick={() => setMode(item)}
-                className={`flex-1 py-2 font-medium transition ${mode === item
-                  ? "bg-[#e9c49a] text-black"
-                  : "text-[#e9c49a] bg-transparent"
-                  }`}
+                className={`flex-1 py-2 font-medium transition ${
+                  mode === item
+                    ? "bg-[#e9c49a] text-black"
+                    : "text-[#e9c49a] bg-transparent"
+                }`}
               >
                 {item.charAt(0).toUpperCase() + item.slice(1)}
               </button>
@@ -139,14 +166,20 @@ export default function FreeSessionSection() {
             <p>In front of Infocity, Infocity</p>
             <p>Chandrasekharpur, Bhubaneswar</p>
             <p>Odisha - 751024</p>
-            <p className="mt-2"><span className="font-bold">Phone:</span> +91 98765 43210</p>
-            <p><span className="font-bold">Email:</span> contact@quickrmathcodes.com</p>
+            <p className="mt-2">
+              <span className="font-bold">Phone:</span> +91 98765 43210
+            </p>
+            <p>
+              <span className="font-bold">Email:</span> contact@quickrmathcodes.com
+            </p>
           </div>
           <div className="flex-shrink-0">
-            <img
+            <Image
               src="/logo.png"
               alt="Quickr Mathcodes"
-              className="h-20 w-auto object-contain"
+              width={80}
+              height={80}
+              className="object-contain"
             />
           </div>
         </div>
@@ -168,25 +201,53 @@ export default function FreeSessionSection() {
       {/* Animations */}
       <style jsx>{`
         @keyframes float1 {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-15px);
+          }
         }
         @keyframes float2 {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(10px); }
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(10px);
+          }
         }
         @keyframes float3 {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(5deg); }
+          0%,
+          100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-20px) rotate(5deg);
+          }
         }
         @keyframes float4 {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(15px) rotate(-5deg); }
+          0%,
+          100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(15px) rotate(-5deg);
+          }
         }
-        .animate-float1 { animation: float1 4s ease-in-out infinite; }
-        .animate-float2 { animation: float2 5s ease-in-out infinite; }
-        .animate-float3 { animation: float3 6s ease-in-out infinite; }
-        .animate-float4 { animation: float4 6s ease-in-out infinite; }
+        .animate-float1 {
+          animation: float1 4s ease-in-out infinite;
+        }
+        .animate-float2 {
+          animation: float2 5s ease-in-out infinite;
+        }
+        .animate-float3 {
+          animation: float3 6s ease-in-out infinite;
+        }
+        .animate-float4 {
+          animation: float4 6s ease-in-out infinite;
+        }
       `}</style>
     </section>
   );
